@@ -294,14 +294,30 @@ SUMMARY = {}
 
 def load_all():
     global SUMMARY
+
     for key in SECTION_INFO:
         path = os.path.join(MODELS_DIR, f"best_{key}.h5")
         if os.path.exists(path):
             try:
+                # Try normal load first
                 MODELS[key] = tf.keras.models.load_model(path, compile=False)
                 print(f"  Loaded: {key} | {MODELS[key].input_shape}")
-            except Exception as e:
-                print(f"  Failed {key}: {e}")
+            except Exception as e1:
+                try:
+                    # Fallback — patch InputLayer to handle batch_shape
+                    import keras.layers as kl
+                    orig_init = kl.InputLayer.__init__
+                    def patched_init(self, *args, **kwargs):
+                        kwargs.pop('batch_shape', None)
+                        kwargs.pop('sparse', None)
+                        kwargs.pop('ragged', None)
+                        orig_init(self, *args, **kwargs)
+                    kl.InputLayer.__init__ = patched_init
+                    MODELS[key] = tf.keras.models.load_model(path, compile=False)
+                    kl.InputLayer.__init__ = orig_init
+                    print(f"  Loaded (patched): {key} | {MODELS[key].input_shape}")
+                except Exception as e2:
+                    print(f"  Failed {key}: {e2}")
         else:
             print(f"  Not found: {path}")
 
