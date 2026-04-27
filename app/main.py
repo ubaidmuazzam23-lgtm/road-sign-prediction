@@ -27,7 +27,7 @@
 #     global SUMMARY
 #     # Load models
 #     for key in SECTION_INFO:
-#         path = os.path.join(MODELS_DIR, f"best_{key}.h5")
+#         path = os.path.join(MODELS_DIR, f"best_{key}.keras")
 #         if os.path.exists(path):
 #             try:
 #                 MODELS[key] = tf.keras.models.load_model(path)
@@ -258,10 +258,10 @@ def download_models_from_hf():
     os.makedirs(MODELS_DIR,  exist_ok=True)
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
-    files_needed = [f"best_{k}.h5" for k in SECTION_INFO] + ["frontend_data.json"]
+    files_needed = [f"best_{k}.keras" for k in SECTION_INFO] + ["frontend_data.json"]
     missing = []
     for fname in files_needed:
-        dest = os.path.join(MODELS_DIR if fname.endswith(".h5") else RESULTS_DIR, fname)
+        dest = os.path.join(MODELS_DIR if fname.endswith(".keras") else RESULTS_DIR, fname)
         if not os.path.exists(dest):
             missing.append(fname)
 
@@ -273,7 +273,7 @@ def download_models_from_hf():
     try:
         from huggingface_hub import hf_hub_download
         for fname in missing:
-            dest_dir = MODELS_DIR if fname.endswith(".h5") else RESULTS_DIR
+            dest_dir = MODELS_DIR if fname.endswith(".keras") else RESULTS_DIR
             dest     = os.path.join(dest_dir, fname)
             print(f"  Downloading {fname}...")
             path = hf_hub_download(
@@ -296,7 +296,7 @@ def load_all():
     global SUMMARY
 
     for key in SECTION_INFO:
-        path = os.path.join(MODELS_DIR, f"best_{key}.h5")
+        path = os.path.join(MODELS_DIR, f"best_{key}.keras")
         if os.path.exists(path):
             try:
                 # Try normal load first
