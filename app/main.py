@@ -298,7 +298,7 @@ def load_all():
         path = os.path.join(MODELS_DIR, f"best_{key}.h5")
         if os.path.exists(path):
             try:
-                MODELS[key] = tf.keras.models.load_model(path)
+                MODELS[key] = tf.keras.models.load_model(path, compile=False)
                 print(f"  Loaded: {key} | {MODELS[key].input_shape}")
             except Exception as e:
                 print(f"  Failed {key}: {e}")
