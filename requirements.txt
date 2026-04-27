@@ -1,8 +1,9 @@
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-python-multipart==0.0.6
-tensorflow==2.13.1
-numpy==1.24.3
+fastapi
+uvicorn[standard]
+python-multipart
+tensorflow-cpu==2.13.1
+numpy
 opencv-python-headless
 Pillow
 huggingface_hub
+typing-extensions==4.5.0
