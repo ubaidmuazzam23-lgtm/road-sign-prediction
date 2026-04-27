@@ -1,0 +1,92 @@
+{
+  "dataset": "GTSRB \u2014 German Traffic Sign Recognition",
+  "num_classes": 43,
+  "class_names": [
+    "Speed 20",
+    "Speed 30",
+    "Speed 50",
+    "Speed 60",
+    "Speed 70",
+    "Speed 80",
+    "End Speed 80",
+    "Speed 100",
+    "Speed 120",
+    "No Passing",
+    "No Pass >3.5t",
+    "Right-of-Way",
+    "Priority Road",
+    "Yield",
+    "Stop",
+    "No Vehicles",
+    "No Veh >3.5t",
+    "No Entry",
+    "General Caution",
+    "Danger Left",
+    "Danger Right",
+    "Double Curve",
+    "Bumpy Road",
+    "Slippery",
+    "Road Narrows",
+    "Road Work",
+    "Traffic Signals",
+    "Pedestrians",
+    "Children",
+    "Bicycles",
+    "Ice/Snow",
+    "Wild Animals",
+    "End Restrictions",
+    "Turn Right",
+    "Turn Left",
+    "Go Straight",
+    "Straight/Right",
+    "Straight/Left",
+    "Keep Right",
+    "Keep Left",
+    "Roundabout",
+    "End No Pass",
+    "End No Pass >3.5t"
+  ],
+  "total_models": 56,
+  "sections": {
+    "section1": {
+      "name": "Optimizer & LR",
+      "best_key": "Adam_lr0.001",
+      "accuracy": 0.7594
+    },
+    "section2": {
+      "name": "Opt \u00d7 LR \u00d7 Batch Size",
+      "best_key": "SGD_lr0.01_bs32",
+      "accuracy": 0.7454
+    },
+    "section3a": {
+      "name": "DNN vs CNN (No Aug)",
+      "best_key": "CNN_RMSprop_lr0.001",
+      "accuracy": 0.8606
+    },
+    "section3b": {
+      "name": "DNN vs CNN (With Aug)",
+      "best_key": "CNN_RMSprop_lr0.001",
+      "accuracy": 0.9336
+    },
+    "section4a": {
+      "name": "Deep DNN vs CNN (No Aug)",
+      "best_key": "Deep_CNN_Adam_lr0.001",
+      "accuracy": 0.92
+    },
+    "section4b": {
+      "name": "Deep DNN vs CNN (With Aug)",
+      "best_key": "Deep_CNN_Adam_lr0.001_Aug",
+      "accuracy": 0.93
+    },
+    "section5": {
+      "name": "Transfer Learning",
+      "best_key": "VGG16_Unfrozen",
+      "accuracy": 0.8918
+    }
+  },
+  "overall_best": {
+    "section": "S3B: DNN/CNN Aug",
+    "key": "CNN_RMSprop_lr0.001",
+    "accuracy": 0.9336
+  }
+}
