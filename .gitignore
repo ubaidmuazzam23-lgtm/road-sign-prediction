@@ -1,2 +1,6 @@
 models/*.h5
 gtsrb_data/
+gtsrb_env/
+__pycache__/
+*.pyc
+.env
